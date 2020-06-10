@@ -1,0 +1,16 @@
+.btn-primary {
+  background-color: $weekend-color;
+  border-color: $weekend-color;
+  &:hover,
+  &:focus {
+    background-color: lighten($weekend-color, 10%);
+    border-color: lighten($weekend-color, 10%);
+  }
+}
+
+.form-control {
+  border: none;
+}
+.color-form {
+  padding: 5px;
+}

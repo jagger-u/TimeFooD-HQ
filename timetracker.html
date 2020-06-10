@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TimeFooD-HQ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./static/images/brand.svg" type="image" sizes="16x16">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./static/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+
+<div id="cover" onclick="hideHelps()" class="cover-all"></div>
+
+<div id="guide-welcome" class="intro-guide-container">
+  <div class="guide-title">
+    <h1>Welcome</h1>
+    <span onclick="hideHelps()" class="close">&times;</span>
+  </div>
+  <div class="guide-content">
+    <p>The <b class="text-main-color">Timetracker</b> app allows you to compare two consecutive months in terms of daily <b class="text-main-color">time spent</b> on productive activities, <b class="text-main-color">workout done</b>, and <b class="text-main-color">wake up time</b>.</p>
+    <p class="mt-2"><b class="text-main-color">Two sample data</b> are included for the demo: <b class="text-graph1-color">April</b>, <b class="text-graph2-color">May</b></p>
+    <div class="config-btn-group">
+      <button onclick="nextHelp('guide-controls', 'guide-welcome', 'config', '')" class="btn btn-info">Next</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="guide-controls" class="intro-guide-container hide-tut">
+  <div class="guide-title">
+    <h1>Controls</h1>
+    <span onclick="hideHelps()" class="close">&times;</span>
+  </div>
+  <div class="guide-content">
+    <ul>
+      <li>Access <button class="btn btn-info btn-sm m-0">Help</button> if needed.</li>
+      <li>To change the layout of the timetracker section press the <button class="btn btn-info btn-sm m-0">Mode:</button> button.</li>
+      <li><button class="btn btn-secondary dropdown-toggle btn-sm m-0">Graph</button> can be used to change the chart type.</li>
+      <li>With <button class="btn btn-primary dropdown-toggle btn-sm m-0">Data</button> you can insert the text data that has the specific format. The application uses <b class="text-main-color">Regular Expressions</b> to extract the information.</li>
+    </ul>
+    <div class="config-btn-group">
+      <button onclick="nextHelp('guide-welcome', 'guide-controls', '', 'config')" class="btn btn-info">Previous</button>
+      <button onclick="hideHelps()" class="btn btn-success ml-2">Finish</button>
+    </div>
+  </div>
+</div>
+
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark container-fluid pl-5 pr-5">
+    <a class="navbar-brand" href="./index.html" style="display: flex;
+    align-items: center;
+    color: #48a5af;
+    font-weight: 700;">
+      <img src="./static/images/brand.svg" alt="brand" class="img-fluid" style="width: 50px">
+      TimeFooD
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menu
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="./timetracker.html">Timetracker</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="./foodcalculator.html">Food calculator</a>
+          </div>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</header>
+
+
+<div class="container-fluid pl-5 pr-5 mt-5">
+  <div class="display-3">Timetracker</div>
+  <br>
+  <div class="row">
+    <div class="col-8">
+      <h1 style="font-weight: 400;"><span class="badge badge-info">Time data</span></h1>
+    </div>
+    <div class="col-4">
+      <div class="config-btn-group">
+        <div id="config"  class="btn-wrapper">
+          <div onclick="displayHelp()" class="btn btn-info mr-2">Help</div>
+          <div onclick="switchMode(this)" class="btn btn-info mr-2">Mode: 1</div>
+          <div class="dropdown mr-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="change-graph" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Graph
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="change-graph">
+              <a onclick="changeGraph('bar', 'TIME') "class="dropdown-item">Bar</a>
+              <a onclick="changeGraph('horizontalBar', 'TIME') "class="dropdown-item">Horizontal Bar</a>
+              <a onclick="changeGraph('line', 'TIME')" class="dropdown-item">Line</a>
+              <a onclick="changeGraph('polarArea', 'TIME') "class="dropdown-item">Polar Area</a>
+              <a onclick="changeGraph('radar', 'TIME') "class="dropdown-item">Radar</a>
+              <a onclick="changeGraph('doughnut', 'TIME') "class="dropdown-item">Doughnut</a>
+              <a onclick="changeGraph('pie', 'TIME') "class="dropdown-item">Pie</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="data-entry" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Data
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="data-entry">
+              <a href="#" class="dropdown-item" data-toggle="modal" data-target="#FIRST_INPUT">Add Previous</a>
+              <a href="#" class="dropdown-item" data-toggle="modal" data-target="#SECOND_INPUT">Add Current</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row-chart-wrapper">
+    <div class="row-chart">
+  
+      <div class="row-chart-element">
+        <canvas id="time_first"></canvas>
+      </div>
+  
+      <div class="row-chart-element">
+        <canvas id="time_second"></canvas>
+      </div>
+      
+      <div class="row-chart-element">
+        <canvas id="time_third"></canvas>
+      </div>
+  
+    </div>
+    <div class="row-chart">
+  
+      <div class="row-chart-element">
+        <canvas id="hist_first"></canvas>
+      </div>
+      
+      <div class="row-chart-element">
+        <canvas id="hist_second"></canvas>
+      </div>
+  
+      <div class="row-chart-element">
+        <canvas id="hist_third"></canvas>
+      </div>
+  
+    </div>
+    <div class="row-chart">
+  
+      <div class="row-chart-element">
+        <div class="slidecontainer mt-5">
+          <label class="form-control">Bin width</label>
+          <input oninput="changeBinWidth(TA_first, id1, this)" type="range" min="0" max="10" value="10" class="slider">
+        </div>
+        <div class="slidecontainer">
+          <label class="form-control">Number of bins</label>
+          <input oninput="changeNumBins(TA_first, id1, this)" type="range" min="0" max="30" value="8" class="slider">
+        </div>
+      </div>
+  
+      <div class="row-chart-element">
+        <div class="slidecontainer mt-5">
+          <label class="form-control">Bin width</label>
+          <input oninput="changeBinWidth(TA_second, id2, this)" type="range" min="0" max="10" value="10" class="slider">
+        </div>
+        <div class="slidecontainer">
+          <label class="form-control">Number of bins</label>
+          <input oninput="changeNumBins(TA_second, id2, this)" type="range" min="0" max="30" value="8" class="slider">
+        </div>
+      </div>
+  
+      <div class="row-chart-element">
+        <div class="slidecontainer mt-5">
+          <label class="form-control">Bin width</label>
+          <input oninput="chngBinWidth(this)" type="range" min="0" max="10" value="10" class="slider">
+        </div>
+        <div class="slidecontainer">
+          <label class="form-control">Number of bins</label>
+          <input oninput="chngNumBins(this)" type="range" min="0" max="30" value="8" class="slider">
+        </div>
+      </div>
+  
+    </div>
+  </div>
+</div>
+<div class="container-fluid pl-5 pr-5 mt-5">
+  <div class="row">
+    <div class="col-9">
+      <h1 style="font-weight: 400;"><span class="badge badge-info">Workout data</span></h1>
+    </div>
+    <div class="col-3">
+      <div class="config-btn-group">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="change-graph" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Graph
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="change-graph">
+            <a onclick="changeGraph('bar','WRKT') "class="dropdown-item">Bar</a>
+            <a onclick="changeGraph('horizontalBar','WRKT') "class="dropdown-item">Horizontal Bar</a>
+            <a onclick="changeGraph('line','WRKT')" class="dropdown-item">Line</a>
+            <a onclick="changeGraph('polarArea','WRKT') "class="dropdown-item">Polar Area</a>
+            <a onclick="changeGraph('radar','WRKT') "class="dropdown-item">Radar</a>
+            <a onclick="changeGraph('doughnut','WRKT') "class="dropdown-item">Doughnut</a>
+            <a onclick="changeGraph('pie','WRKT') "class="dropdown-item">Pie</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <canvas id="workout_first"></canvas>
+    </div>
+    <div class="col-4">
+      <canvas id="workout_second"></canvas>
+    </div>
+    <div class="col-4">
+      <canvas id="workout_third"></canvas>
+    </div>
+  </div>
+</div>
+<div class="container-fluid pl-5 pr-5 mt-5">
+  <div class="row">
+    <div class="col-9">
+      <h1 style="font-weight: 400;"><span class="badge badge-info">Wake up time</span></h1>
+    </div>
+    <div class="col-3">
+      <div class="config-btn-group">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="change-graph" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Graph
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="change-graph">
+            <a onclick="changeGraph('bar', 'WAKE') "class="dropdown-item">Bar</a>
+            <a onclick="changeGraph('horizontalBar', 'WAKE') "class="dropdown-item">Horizontal Bar</a>
+            <a onclick="changeGraph('line', 'WAKE')" class="dropdown-item">Line</a>
+            <a onclick="changeGraph('polarArea', 'WAKE') "class="dropdown-item">Polar Area</a>
+            <a onclick="changeGraph('radar', 'WAKE') "class="dropdown-item">Radar</a>
+            <a onclick="changeGraph('doughnut', 'WAKE') "class="dropdown-item">Doughnut</a>
+            <a onclick="changeGraph('pie', 'WAKE') "class="dropdown-item">Pie</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <canvas id="wakeup_first"></canvas>
+    </div>
+    <div class="col-4">
+      <canvas id="wakeup_second"></canvas>
+    </div>
+    <div class="col-4">
+      <canvas id="wakeup_third"></canvas>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="FIRST_INPUT" tabindex="-1" role="dialog" aria-labelledby="FIRST_INPUTLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="FIRST_INPUTLabel">First input</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea name="" id="TA_first" class="form-control"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="ClearTA(TA_first)" class="btn btn-danger">Clear</button>
+        <button type="button" onclick="Update(TA_first, id1)" class="btn btn-success" data-dismiss="modal">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="SECOND_INPUT" tabindex="-1" role="dialog" aria-labelledby="SECOND_INPUTLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="SECOND_INPUTLabel">Second input</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea name="" id="TA_second" class="form-control"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="ClearTA(TA_second)" class="btn btn-danger">Clear</button>
+        <button type="button" onclick="Update(TA_second, id2)" class="btn btn-success" data-dismiss="modal">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<footer style="color: #48a5af;">
+  <div class="container-fluid pl-5 pr-5 padding">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="footer-brand">
+          <a href="./index.html" style="display: flex;
+          align-items: center; color: #48a5af;">
+            <img src="./static/images/brand.svg" alt="brand" class="img-fuild" style="width: 100px;">
+            <h1>TimeFooD</h1>
+          </a>
+          <h5>&copy; timefoodhq.com</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h5>Applications</h5>
+        <ul>
+          <li><a href="./timetracker.html">Timetracker</a></li>
+          <li><a href="./foodcalculator.html">Food calculator</a></li>
+          <li><a href="#">Methodology</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Troubleshooting</a></li>
+          <li><a href="#">Report bugs</a></li>
+          <li><a href="#">Get help</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <h5>Creator</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contribute</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="./static/javascript/timetracker/main/global.js"></script>
+<script src="./static/javascript/helperfunctions.js"></script>
+<script src="./static/javascript/timetracker/main/initialize.js"></script>
+<script src="./static/javascript/timetracker/main/seedData.js"></script>
+<script src="./static/javascript/timetracker/chart/chart_bar.js"></script>
+<script src="./static/javascript/timetracker/chart/chart_histogram.js"></script>
+<script src="./static/javascript/timetracker/chart/chart_third.js"></script>
+<script src="./static/javascript/timetracker/input/class.js"></script>
+<script src="./static/javascript/timetracker/input/input.js"></script>
+<script src="./static/javascript/timetracker/tutorial/tutorial.js"></script>
+<script>  
+
+
+
+
+function Update(TA, id) {  
+  let ALL_DAYS = createDayPeriods(TA.value);  
+  if (ALL_DAYS.length != 0) {
+    refreshGraph(ALL_DAYS, id, 'line', 'TIME');
+    refreshGraph(ALL_DAYS, id, 'bar', 'WRKT');
+    refreshGraph(ALL_DAYS, id, 'bar', 'WAKE');
+    refreshHistogram(ALL_DAYS, id);
+  }
+
+  let AVG_DAYS = generateThirdDAYS();
+  if (AVG_DAYS.length != 0) {
+    refreshGraph(AVG_DAYS, id3, 'line', 'TIME');
+    refreshGraph(AVG_DAYS, id3, 'bar', 'WRKT');
+    refreshGraph(AVG_DAYS, id3, 'bar', 'WAKE');
+    refreshHistogram(AVG_DAYS, id3);
+  }
+}
+
+function ClearTA(TA) {
+  TA.value = ``;
+}
+
+function changeGraph(BAR_TYPE, VARIABLE) {
+  let ALL_DAYS = createDayPeriods(TA_first.value);
+  if (ALL_DAYS.length != 0) {
+    refreshGraph(ALL_DAYS, id1, BAR_TYPE, VARIABLE);
+  }
+  ALL_DAYS = createDayPeriods(TA_second.value);
+  if (ALL_DAYS.length != 0) {
+    refreshGraph(ALL_DAYS, id2, BAR_TYPE, VARIABLE);
+  }
+  let AVG_DAYS = generateThirdDAYS();  
+  if (AVG_DAYS.length != 0) {
+    refreshGraph(AVG_DAYS, id3, BAR_TYPE, VARIABLE);
+  }
+}
+
+
+
+
+
+
+
+
+
+function switchMode(btn) {
+  let rowCharts = document.querySelectorAll('.row-chart');
+  let rowChartsElems = document.querySelectorAll('.row-chart-element');
+  let mode_1;
+  let mode_2;
+  if (btn.textContent[btn.textContent.length-1] == '1') {
+    btn.textContent = `${btn.textContent.substring(0,6)}2`;
+    mode_1 = "100%";
+    mode_2 = "calc(100% / 3 - 15px)";
+  } else {
+    mode_1 = "calc(100% / 3 - 15px)";
+    mode_2 = "100%";
+    btn.textContent = `${btn.textContent.substring(0,6)}1`;
+  }
+  rowCharts.forEach((row) => row.style.width = mode_1);
+  rowChartsElems.forEach((rowElem) => rowElem.style.width = mode_2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Initialize
+document.getElementById('TA_first').textContent = AprilSampleData;
+document.getElementById('TA_second').textContent = MaySampleData;
+Update(TA_first, id1);
+Update(TA_second, id2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

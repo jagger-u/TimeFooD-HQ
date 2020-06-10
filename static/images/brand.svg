@@ -1,0 +1,25 @@
+<svg width="325" height="324" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <defs>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_2_blur">
+   <feGaussianBlur stdDeviation="0" in="SourceGraphic"/>
+  </filter>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="326" width="327" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <text transform="rotate(-4 114.85937500000016,144.7578125) " stroke="#000" font-weight="bold" font-style="normal" xml:space="preserve" text-anchor="start" font-family="Euphoria, sans-serif" font-size="250" id="svg_1" y="231.453125" x="38.5" stroke-width="0" fill="#48a5af">T</text>
+  <text transform="rotate(-4 218.84375000000017,187.23437499999966) " stroke="#000" font-weight="bold" filter="url(#svg_2_blur)" font-style="normal" xml:space="preserve" text-anchor="start" font-family="Euphoria, sans-serif" font-size="250" id="svg_2" y="273.925994" x="142.493594" stroke-width="0" fill="#48a5af">F</text>
+  <ellipse ry="1" id="svg_4" cy="11.453125" cx="454" stroke-width="0" stroke="#000" fill="#48a5af"/>
+  <text font-weight="bold" stroke="#000" xml:space="preserve" text-anchor="start" font-family="Euphoria, sans-serif" font-size="250" id="svg_13" y="-652.899062" x="414.003845" stroke-opacity="null" stroke-width="0" fill="#48a5af">ime</text>
+  <ellipse stroke="#000" ry="15" rx="15" id="svg_27" cy="119.584943" cx="63.306739" stroke-width="0" fill="#48a5af"/>
+  <ellipse stroke="#000" ry="15" rx="15" id="svg_28" cy="254.26198" cx="230.241748" stroke-width="0" fill="#48a5af"/>
+  <rect id="svg_30" height="0" width="0.806449" y="197.849194" x="-120.160486" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#48a5af"/>
+ </g>
+</svg>

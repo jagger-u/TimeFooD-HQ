@@ -1,0 +1,117 @@
+
+
+.box-row {
+  display: flex;
+  .bh, .bd {
+    width: calc(100% / 7);
+    text-align: center;
+  }
+  .bh {
+    font-size: 30px;
+    background: $weekday-color;
+    color: #fff;
+    &:nth-child(6),
+    &:nth-child(7) {
+      background: $weekend-color;
+    }
+  }
+  .bd {
+    min-height: 100px;
+    background: $weekday-data-color;
+    border-bottom: 3px solid $weekday-color;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    position: relative;
+    .box {
+      width: 40%;
+      height: 40%;
+      margin: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: darken($weekday-data-color, 3%);
+      &:hover {
+        background: lighten($weekday-color, 20%);
+        color: $weekday-color;
+        cursor: pointer;
+        outline: none;
+      }
+    }
+    .focused {
+      background: lighten($weekday-color, 20%);
+      color: $weekday-color;
+      cursor: pointer;
+      outline: 3px solid $weekday-color;
+    }
+    .non-empty {
+      background: lighten($weekday-color, 20%);
+      color: $weekday-color;
+    }
+    .box-label {
+      position: absolute;
+      top: calc(50% - 22px);
+      left: calc(50% - 22px);
+      width: 40px;
+      height: 40px;
+      font-size: 25px;
+      border-radius: 20px;
+      color: $weekday-color;
+      background: $weekday-data-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        background: lighten($weekday-data-color, 20%);
+        color: $weekday-color;
+        cursor: pointer;
+      }
+    }
+    &:nth-child(6),
+    &:nth-child(7) {
+      background: $weekend-data-color;
+      border-bottom: 3px solid $weekend-color;
+      .box {
+        color: lighten($weekend-color, 26%);
+        &:hover {
+          background: lighten($weekend-color, 20%);
+          color: $weekend-color;
+          cursor: pointer;
+          outline: none;
+        }
+      }
+      .focused {
+        background: lighten($weekend-color, 20%);
+        color: $weekend-color;
+        cursor: pointer;
+        outline: 3px solid $weekend-color;
+      }
+      .box-label {
+        background: $weekend-data-color;
+        color: $weekend-color;
+        &:hover {
+          background: lighten($weekend-data-color, 20%);
+          color: $weekend-color;
+          cursor: pointer;
+        }
+      }
+      .non-empty {
+        background: lighten($weekend-color, 20%);
+        color: $weekend-color;
+      }
+    }
+  }
+}
+
+
+
+.menulist-item {
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+}

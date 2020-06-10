@@ -1,0 +1,14 @@
+.row-chart-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.row-chart {
+  display: flex;
+  width: calc(100% / 3 - 15px);
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.row-chart-element {
+  width: 100%;
+}

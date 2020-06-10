@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TimeFooD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./static/images/brand.svg" type="image" sizes="16x16">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+  crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./static/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+
+<style>
+
+</style>
+
+
+<div id="cover" onclick="hideHelps()" class="cover-all"></div>
+
+
+<div id="guide-welcome" class="intro-guide-container">
+  <div class="guide-title">
+    <h1>Welcome</h1>
+    <span onclick="hideHelps()" class="close">&times;</span>
+  </div>
+  <div class="guide-content">
+    <p>The <b class="text-main-color">Food Calculator</b> app allows you to plan your upcoming meals and calculate the cost.</p>
+    <div class="config-btn-group">
+      <button onclick="nextHelp('guide-slider', 'guide-welcome', 'slidecontainer', '')" class="btn btn-info">Next</button>
+    </div>
+  </div>
+</div>
+
+<div id="guide-slider" class="intro-guide-container hide-tut">
+  <div class="guide-title">
+    <h1>Slider</h1>
+    <span onclick="hideHelps()" class="close">&times;</span>
+  </div>
+  <div class="guide-content">
+    <ul>
+      <li>Adjust the <b class="text-main-color">slider</b> <input type="range" min="0" max="5" value="2" class="slider-small"> accordingly to the number of days needed for planning.</li>
+      <li>The first day automatically starts from tomorrow.</li>
+    </ul>
+    <div class="config-btn-group">
+      <button onclick="nextHelp('guide-welcome', 'guide-slider', '', 'slidecontainer')" class="btn btn-info">Previous</button>
+      <button onclick="nextHelp('guide-controls', 'guide-slider', 'config', 'slidecontainer')" class="btn btn-info ml-2">Next</button>
+    </div>
+  </div>
+</div>
+
+<div id="guide-controls" class="intro-guide-container hide-tut">
+  <div class="guide-title">
+    <h1>Controls</h1>
+    <span onclick="hideHelps()" class="close">&times;</span>
+  </div>
+  <div class="guide-content">
+    <ul>
+      <li>Access <button class="btn btn-info btn-sm m-0">Help</button> if needed.</li>
+      <li>With <button class="btn btn-info dropdown-toggle btn-sm m-0">Category</button> and <button class="btn btn-info dropdown-toggle btn-sm m-0">Data</button> you can add/delete/modify items as you wish. By default a few recipes and food items are given.</li>
+      <li>Press the <button class="btn btn-primary btn-sm m-0">Total:</button> button to display the overall cost.</li>
+    </ul>
+    <div class="config-btn-group">
+      <button onclick="nextHelp('guide-slider', 'guide-controls', 'slidecontainer', 'config')" class="btn btn-info">Previous</button>
+      <button onclick="nextHelpBoxContainer('guide-box-container', 'guide-controls', 'box-container', 'config')" class="btn btn-info ml-2">Next</button>
+    </div>
+  </div>
+</div>
+
+<div id="guide-box-container" class="intro-guide-container hide-tut">
+  <div class="guide-title">
+    <h1>Calendar</h1>
+    <span onclick="hideHelps()" class="close">&times;</span>
+  </div>
+  <div class="guide-content">
+    <ul>
+      <li>Each day has <b class="text-main-color">four</b> meal times labelled by the following: </li>
+      <li>
+        <b class="text-primary">Breakfast:</b> <span class="box-tutorial"><i class="fas fa-coffee"></i></span>
+        <b class="text-success">Lunch:</b> <span class="box-tutorial"><i class="fas fa-utensils"></i></span>
+        <b class="text-warning">Snack:</b> <span class="box-tutorial"><i class="fas fa-apple-alt"></i></span>
+        <b class="text-info">Dinner:</b> <span class="box-tutorial"><i class="fas fa-utensils"></i></span>
+      </li>
+      <li>Press on the center <span class="box-label">11</span> to see all the menus associated with that day.</li>
+    </ul>
+    <div class="config-btn-group">
+      <button onclick="nextHelp('guide-controls', 'guide-box-container', 'config', 'box-container')" class="btn btn-info">Previous</button>
+      <button onclick="nextHelpBoxContainerAdd('guide-box_controls', 'guide-box-container', 'box_controls', 'box-container')" class="btn btn-info ml-2">Next</button>
+    </div>
+  </div>
+</div>
+
+<div id="guide-box_controls" class="intro-guide-container hide-tut">
+  <div class="guide-title">
+    <h1>Examine box</h1>
+    <span onclick="hideHelps()" class="close">&times;</span>
+  </div>
+  <div class="guide-content">
+    <ul>
+      <li>Assign a menu to the specific meal time of the day.</li>
+      <li>Press on the center <span class="box-label">11</span> to see all the menus associated with that day.</li>
+    </ul>
+    <div class="config-btn-group">
+      <button onclick="nextHelpBoxContainer('guide-box-container', 'guide-box_controls', 'box-container', 'box_controls')" class="btn btn-info">Previous</button>
+      <button onclick="hideHelps()" class="btn btn-success ml-2">Finish</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark container-fluid pl-5 pr-5">
+    <a class="navbar-brand" href="./index.html" style="display: flex;
+    align-items: center;
+    color: #48a5af;
+    font-weight: 700;">
+      <img src="./static/images/brand.svg" alt="brand" class="img-fluid" style="width: 50px">
+      TimeFooD
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menu
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="./timetracker.html">Timetracker</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="./foodcalculator.html">Food calculator</a>
+          </div>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</header>
+
+
+
+
+
+
+
+<div class="container-fluid pl-5 pr-5 mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="display-3">Food calculator</div>
+    </div>
+    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 mt-3">
+      <div id="slidecontainer" class="slidecontainer">
+        <h1><span id="DBoxesMonth" class="ml-1 badge badge-info">Month</span></h1>
+        <label class="form-control" style="font-size: 20px;">
+          Number of DBoxes: <span id="NDBoxes" class="ml-1 badge badge-info" style="font-size: 20px;"></span>
+        </label>
+        <input id="calendarSlider" oninput="changeNumDayBoxes(this)" type="range" min="0" max="0" value="0" class="slider">
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+      <div class="config-btn-group">
+        <div id="config" class="btn-wrapper">
+          <button onclick="displayHelp()" class="btn btn-info">Help</button>
+          <button onclick="DISPLAY_THE_MEGA_ULTRA_TOTAL_FOODCOST(this)" class="btn btn-primary ml-2">Total: 0</button>
+          <div class="dropdown ml-2">
+            <button class="btn btn-info dropdown-toggle" type="button" id="data-entry" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Category
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="data-entry">
+              <a href="#" class="dropdown-item" data-toggle="modal" data-target="#FoodCatInput">Food Category</a>
+              <a href="#" class="dropdown-item" data-toggle="modal" data-target="#NutritionCatInput">Nutrition Category</a>
+            </div>
+          </div>
+          <div class="dropdown ml-2">
+            <button class="btn btn-info dropdown-toggle" type="button" id="data-entry" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Data
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="data-entry">
+              <a href="#" class="dropdown-item" data-toggle="modal" data-target="#MenuAndFood">Menu</a>
+              <a href="#" class="dropdown-item" data-toggle="modal" data-target="#FoodInput">Food</a>
+              <a href="#" onclick="HTML_TabulateALL()" class="dropdown-item" data-toggle="modal" data-target="#DBoxInput">Day Box</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container-fluid pl-5 pr-5 mt-5">
+  <div class="row">
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+      <div id="box-container" class="box-container">
+        <div class="box-head">
+          <div class="box-row">
+            <div class="bh">M</div>
+            <div class="bh">T</div>
+            <div class="bh">W</div>
+            <div class="bh">T</div>
+            <div class="bh">F</div>
+            <div class="bh">S</div>
+            <div class="bh">S</div>
+          </div>
+        </div>
+        <div id="box-body">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+      <!-- controls go here -->
+      <div class="box_controls" id="box_controls">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal FoodCatInput -->
+<div class="FoodInputModal modal fade" id="FoodCatInput" tabindex="-1" role="dialog" aria-labelledby="FoodCatInputLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="FoodCatInputLabel">Food category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-container-scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Color</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="FoodCatList">
+              <!-- Existing categories should be displayed -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="form-group">
+          <label for="FoodCatName">Name</label>
+          <input type="text" id="FoodCatName" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="FoodCatDesc">Description</label>
+          <input type="text" id="FoodCatDesc" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="FoodCatLabelColor">Label color</label>
+          <input type="color" id="FoodCatLabelColor" class="form-control" value="#cba364">
+        </div>
+        <div class="config-btn-group mt-1">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" onclick="AddFoodCat(FoodCatName.value, FoodCatDesc.value, FoodCatLabelColor.value)" class="btn btn-success ml-2">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal NutritionCatInput -->
+<div class="FoodInputModal modal fade" id="NutritionCatInput" tabindex="-1" role="dialog" aria-labelledby="NutritionCatInputLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="NutritionCatInputLabel">Nutrition category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-container-scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Score</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="NutritionCatList">
+              <!-- Existing categories should be displayed -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="form-group">
+          <label for="NutritionCat">Name</label>
+          <input type="text" id="NutritionCat" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="NutritionCatDesc">Description</label>
+          <input type="text" id="NutritionCatDesc" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="NutritionScore">Score</label>
+          <select id="NutritionScore" class="form-control">
+            <option>1</option>
+            <option>0</option>
+            <option>-2</option>
+          </select>
+        </div>
+        <div class="config-btn-group mt-1">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" onclick="AddNutritionCat(NutritionCat.value, NutritionCatDesc.value, NutritionScore.value)" class="btn btn-success ml-2">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal DBox display -->
+<div class="FoodInputModal modal fade" id="DBoxInput" tabindex="-1" role="dialog" aria-labelledby="DBoxInputLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DBoxInputLabel">Day-box</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-container-scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Total (HUF)</th>
+              </tr>
+            </thead>
+            <tbody id="DBoxList">
+              <!-- Existing dboxes should be displayed -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="config-btn-group mt-1">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal FoodInput -->
+<div class="FoodInputModal modal fade" id="FoodInput" tabindex="-1" role="dialog" aria-labelledby="FoodInputLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-bigger modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="FoodInputLabel">Food</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-container-scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th style="width: 350px;">Food name</th>
+                <th>Quantity</th>
+                <th>Bulkcost</th>
+                <th style="width: 300px;">Category</th>
+                <th style="width: 280px;">Nutrition</th>
+                <th style="width: 155px;">Total (HUF)</th>
+                <th style="width: calc(100% - 1000px);"></th>
+              </tr>
+            </thead>
+            <tbody id="FoodList">
+              <!-- Existing foods should be displayed -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="form-group">
+          <label for="FoodName">Food name</label>
+          <input id="FoodName" class="form-control" type="text" placeholder="20 characters">
+        </div>
+        <div class="form-group">
+          <label for="Quantity">Quantity</label>
+          <input id="Quantity" class="form-control" type="text" placeholder="Integer between 0 and 1">
+        </div>
+        <div class="form-group">
+          <label for="Bulkcost">Bulkcost</label>
+          <input style="width: 230px;" id="Bulkcost" class="form-control" type="text" placeholder="Price of purchase from shelf">
+        </div>
+        <div class="form-group">
+          <label for="FoodCategorySelect">Category</label>
+          <select id="FoodCategorySelect" class="form-control FoodCategorySelect_s">
+
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="FoodNutritionSelect">Nutrition</label>
+          <select id="FoodNutritionSelect" class="form-control FoodNutritionSelect_s">
+
+          </select>
+        </div>
+        <div class="config-btn-group mt-1">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button onclick="AddFood(FoodName.value, Quantity.value, Bulkcost.value, FoodCategorySelect.value, FoodNutritionSelect.value)" class="btn btn-success ml-2">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Menu and Food -->
+<div class="FoodInputModal modal fade" id="MenuAndFood" tabindex="-1" role="dialog" aria-labelledby="MenuAndFoodLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-bigger modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="MenuAndFoodLabel">Menu and Food</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modal-body-flex">
+        <div class="table-container-scroll table-h-150 mb-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 100px;">menu_id</th>
+                <th>Menu name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="MenuList">
+              <!-- Existing menus should be displayed -->
+            </tbody>
+          </table>
+        </div>
+        <div class="form-wrapper">
+          <h5>Create a new menu</h5>
+          <div class="form-group">
+            <label for="MenuName">Menu name</label>
+            <input id="MenuName" class="form-control" type="text" placeholder="20 characters">
+          </div>
+          <div class="config-btn-group">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button onclick="AddMenu(MenuName.value)" class="btn btn-success ml-2">Create</button>
+          </div>
+        </div>
+        <div class="table-container-scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 100px;">mf_id</th>
+                <th style="width: 180px;">Menu</th>
+                <th style="width: calc(100% - 600px);">Foods</th>
+                <th style="width: 120px;">Total (HUF)</th>
+              </tr>
+            </thead>
+            <tbody id="MenuAndFoodList">
+              <!-- Existing foods should be displayed -->
+            </tbody>
+          </table>
+        </div>
+        <div class="form-wrapper">
+          <h5>What are the ingredients?</h5>
+          <div class="form-group">
+            <label for="MenuSelect">Menu</label>
+            <select id="MenuOptionsSelect" class="form-control">
+  
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="FoodSelect">Food</label>
+            <select id="FoodSelect" class="form-control">
+  
+            </select>
+          </div>
+          <div class="config-btn-group">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button onclick="AddMenuAndFood(MenuOptionsSelect.value, FoodSelect.value)" class="btn btn-success ml-2">Add</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal All menus for a specific day-box -->
+<div class="FoodInputModal modal fade" id="AllMenusInput" tabindex="-1" role="dialog" aria-labelledby="AllMenusInputLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AllMenusInputLabel">All Menus</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="DBox_MenuList">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="config-btn-group mt-1">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="color: #48a5af;">
+  <div class="container-fluid pl-5 pr-5 padding">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="footer-brand">
+          <a href="./index.html" style="display: flex;
+          align-items: center; color: #48a5af;">
+            <img src="./static/images/brand.svg" alt="brand" class="img-fuild" style="width: 100px;">
+            <h1>TimeFooD</h1>
+          </a>
+          <h5>&copy; timefoodhq.com</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h5>Applications</h5>
+        <ul>
+          <li><a href="./timetracker.html">Timetracker</a></li>
+          <li><a href="./foodcalculator.html">Food calculator</a></li>
+          <li><a href="#">Methodology</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Troubleshooting</a></li>
+          <li><a href="#">Report bugs</a></li>
+          <li><a href="#">Get help</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <h5>Creator</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contribute</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="./static/javascript/foodcalculator/global.js"></script>
+<script src="./static/javascript/foodcalculator/globalfunc.js"></script>
+<script src="./static/javascript/foodcalculator/helperfunc.js"></script>
+<script src="./static/javascript/helperfunctions.js"></script>
+<script src="./static/javascript/foodcalculator/seedData.js"></script>
+<script src="./static/javascript/foodcalculator/input/foodcat.js"></script>
+<script src="./static/javascript/foodcalculator/input/nutritioncat.js"></script>
+<script src="./static/javascript/foodcalculator/calendar/daybox.js"></script>
+<script src="./static/javascript/foodcalculator/input/menu.js"></script>
+<script src="./static/javascript/foodcalculator/input/food.js"></script>
+<script src="./static/javascript/foodcalculator/input/menu_and_food.js"></script>
+<script src="./static/javascript/foodcalculator/controls/examine.js"></script>
+<script src="./static/javascript/foodcalculator/controls/dbox_menu.js"></script>
+<script src="./static/javascript/foodcalculator/tutorials/tutorial.js"></script>
+<script>  
+
+
+
+
+
+
+
+
+
+function DISPLAY_THE_MEGA_ULTRA_TOTAL_FOODCOST(btn) {
+  btn.textContent = `Total: ${WHAT_IS_DA_TOTAL_FOOD_COST_EH()}`;
+}
+
+
+refreshFoodCatList();
+refreshNutritionCatList();
+refreshMenuList();
+refreshFoodList();
+
+refreshMenuAndFoodList();
+refreshFoodOptionsSelect();
+refreshMenuOptionsSelect();
+
+
+
+
+</script>
+</html>

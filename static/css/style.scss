@@ -1,0 +1,86 @@
+
+
+@import '_navigation.scss';
+@import '_global.scss';
+@import '_footer.scss';
+@import '_tutorial.scss';
+@import '_overwrite.scss';
+
+@import './timetracker/_layout.scss';
+@import './timetracker/_controls.scss';
+@import './timetracker/_input.scss';
+
+@import './foodcalculator/_box.scss';
+@import './foodcalculator/_modals.scss';
+@import './foodcalculator/_slider.scss';
+@import './foodcalculator/_mobile.scss';
+
+
+
+
+
+.config-btn-group {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  .btn-wrapper {
+    display: flex;
+    width: 100%;
+  }
+}
+
+.table-container-scroll {
+  height: 250px;
+  overflow: auto;
+  overflow-x: hidden;
+  background: #fff;
+  text-align: center;
+  .table {
+    height: 100%;
+    margin: 0;
+  }
+  .table thead th, td {
+    border: none;
+  }
+  thead tr {
+    background: darken($weekday-data-color, 30%);
+    color: #fff;
+  }
+  tbody tr {
+    &:nth-child(even) {
+      background: $weekday-data-color;
+    }
+    &:nth-child(odd) {
+      background: lighten($weekday-data-color, 10%);
+    }
+  }
+}
+
+
+.table-h-150 {
+  height: 150px;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  // border: 7px solid #232943;
+  box-shadow: inset 0 0 15px 2.5px $weekday-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    45deg,
+    $weekday-color,
+    $weekend-color
+  );
+  border-radius: 10px;
+}
+
+
+// #dc3545,
+// #007bff,

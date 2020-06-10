@@ -1,0 +1,44 @@
+$text-graph1-color: rgb(100,100,183);
+$text-graph2-color: rgb(45,154,253);
+
+
+$primary-color: #5fa2ad;
+
+
+
+$footer-background: #343a40;
+$footer-text: #d4d4d4;
+
+
+
+
+
+
+
+$weekday-color: #49a5af;
+$weekend-color: #4267b9;
+$weekday-data-color: #afe4e7;
+$weekend-data-color: #a5b9e4;
+
+$border-radius: 5px;
+
+
+ul {
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+
+.text-graph1-color {
+  color: $text-graph1-color;
+}
+.text-graph2-color {
+  color: $text-graph2-color;
+}

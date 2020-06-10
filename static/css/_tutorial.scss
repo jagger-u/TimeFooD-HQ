@@ -1,0 +1,190 @@
+.intro-guide-container {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  border-radius: $border-radius;
+  left: 25%;
+  top: 30%;
+  z-index: 1000;
+  .guide-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 25px;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+    color: #fff;
+    background: $weekday-color;
+    h1 {
+      width: calc(80% - 30px);
+      margin-bottom: 0;
+    }
+    .close {
+      cursor: pointer;
+      color: #fff;
+    }
+  }
+  .guide-content {
+    padding: 25px;
+    font-size: 18px;
+    // text-align: center;
+    width: 100%;
+    background: #fff;
+    
+    // height: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    // align-content: space-evenly;
+    justify-content: flex-start;
+    // position: relative;
+
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    ul {
+      margin-left: 20px;
+    }
+    li {
+      list-style: disc;
+      margin-bottom: 5px;
+    }
+    p {
+      margin-bottom: 0;
+      width: 100%;
+    }
+    .config-btn-group {
+      height: unset;
+    }
+    button {
+      margin-top: 10px;
+      // position: absolute;
+      // bottom: 15px;
+      // right: 15px;
+    }
+  }
+}
+
+
+.to-reveal {
+  z-index: 1000;
+  position: relative;
+  background: #fff;
+  border: 5px solid rgb(248, 98, 98);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+#guide-slider {
+  width: 350px;
+  left: 920px;
+  top: 150px;
+  .guide-content {
+    height: unset;
+  }
+}
+#guide-controls {
+  width: 450px;
+  left: 350px;
+  top: 150px;
+  .guide-content {
+    height: unset;
+  }
+}
+#guide-box-container {
+  width: 60%;
+  left: 300px;
+  top: 55px;
+  .guide-content {
+    height: unset;
+  }
+  .box-tutorial {
+    width: 50px;
+    height: 35px;
+    margin: 5px;
+    font-size: 16px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: lighten($weekday-color, 20%);
+    color: $weekday-color;
+    &:hover {
+      background: lighten($weekday-color, 20%);
+      color: $weekday-color;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+  .box-label {
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+    border-radius: 20px;
+    color: $weekday-color;
+    background: $weekday-data-color;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      background: lighten($weekday-data-color, 20%);
+      color: $weekday-color;
+      cursor: pointer;
+    }
+  }
+}
+#guide-box_controls {
+  width: 50%;
+  left: 20%;
+  top: 40%;
+  .guide-content {
+    height: unset;
+  }
+  .box-label {
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+    border-radius: 20px;
+    color: $weekday-color;
+    background: $weekday-data-color;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      background: lighten($weekday-data-color, 20%);
+      color: $weekday-color;
+      cursor: pointer;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+.cover-all {
+  position: fixed;
+  background: #184e4794;
+  height: 100%;
+  width: 100%;
+  z-index: 990;
+}
+
+.hide-tut {
+  display: none;
+}
+
+
+.text-main-color {
+  color: $weekday-color;
+  font-weight: 500;
+}
+
+.text-secondary-color {
+  color: $weekend-color;
+  font-weight: 500;
+}

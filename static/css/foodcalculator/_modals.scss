@@ -1,0 +1,114 @@
+
+
+
+
+.FoodInputModal {
+  color: #fff;
+  .close {
+    color: #fff;
+  }
+  .modal-content {
+    border-radius: $border-radius;
+    background: none;
+    border: none;
+  }
+  .modal-dialog {
+    max-width: 55%;
+  }
+  .modal-dialog-bigger {
+    max-width: 78%;
+  }
+  .modal-header {
+    background: $primary-color;
+    border-top-right-radius: $border-radius;
+    border-top-left-radius: $border-radius;
+    border: none;
+    h5 {
+      font-size: 40px;
+    }
+  }
+  .modal-body {
+    background: $primary-color;
+    padding: 10px 15px;
+    .close {
+      color: $primary-color;
+    }
+  }
+  .modal-body-flex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .table-container-scroll {
+      width: 65%;
+    }
+    .form-wrapper {
+      width: 32%;
+      .config-btn-group {
+        float: none;
+        width: unset;
+        height: unset;
+      }
+    }
+  }
+  .modal-footer {
+    flex-wrap: wrap;
+    border: none;
+    border-bottom-right-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+    justify-content: flex-start;
+    background: $primary-color;
+    .input-3-division {
+      width: calc(100% / 3 - 15px);
+    }
+    .input-5-division {
+      width: calc(100% / 5 - 15px);
+    }
+  }
+}
+
+
+
+// For the Menu and Food Modal
+.td-foodList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+
+// For the calendar display for menus of a day-box
+#AllMenusInput {
+  .list-group-item {
+    color: #000;
+  }
+}
+
+
+
+// This should be in a different scss file
+.title-h5 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-details {
+  display: flex;
+  justify-content: space-between;
+  .menu-total {
+    width: 135px;
+    display: flex;
+    justify-content: flex-end;
+    span {
+      &:nth-child(1) {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+.food-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 150px;  
+}
