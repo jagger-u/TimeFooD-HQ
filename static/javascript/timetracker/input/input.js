@@ -5,7 +5,7 @@ function getMatches(input, inputREG) {
   let result = Array.from(rgxResult, x => x[0]);
   return result;
 }
-function getTimeElement(input, regex) {
+function getTimeElements(input, regex) {
   let timeArray = [];
   input.forEach((e) => {
     let match = getMatches(e, regex)[0];
@@ -13,17 +13,28 @@ function getTimeElement(input, regex) {
   });
   return timeArray;
 }
+function getTimeElement(time_block, regex) {
+  const match = getMatches(time_block, regex)[0];
+  const time_elem = parseInt(match.substring(1,match.length-1));
+  return time_elem;
+}
 
-function bringHoursMins(input) {
+function bringHoursMins(time_blocks) {
   const sHourREG = /(\{[0-9]{1,2}:|\[[0-9]{1,2}:)/g;
   const sMinREG = /:[0-9]{1,2}-/g;
   const eHourREG = /-[0-9]{1,2}:/g;
   const eMinREG = /(:[0-9]{1,2}\}|:[0-9]{1,2}\])/g;
-  let sHours = getTimeElement(input, sHourREG);
-  let sMins = getTimeElement(input, sMinREG);
-  let eHours = getTimeElement(input, eHourREG);
-  let eMins = getTimeElement(input, eMinREG);
-  return {sHours, sMins, eHours, eMins};
+
+
+  const hours_mins = time_blocks.map(time_block => {
+    const sHour = getTimeElement(time_block, sHourREG);
+    const sMin = getTimeElement(time_block, sMinREG);
+    const eHour = getTimeElement(time_block, eHourREG);
+    const eMin = getTimeElement(time_block, eMinREG);
+    return {sHour: sHour, sMin: sMin, eHour: eHour, eMin: eMin};
+  });
+
+  return hours_mins;
 }
 
 function createDayPeriods(input) {
@@ -62,7 +73,19 @@ function createDayPeriods(input) {
 
     // Bring start/end hours/mins
     // calculated the total
-    let {sHours, sMins, eHours, eMins} = bringHoursMins(times);
+    const hours_mins = bringHoursMins(times);
+
+    let sHours = [];
+    let sMins = [];
+    let eHours = [];
+    let eMins = [];
+    hours_mins.forEach(hm => {
+      sHours.push(hm.sHour);
+      sMins.push(hm.sMin);
+      eHours.push(hm.eHour);
+      eMins.push(hm.eMin);
+    });
+    
     let total = 0;
     for (let i=0; i < sHours.length; i++) {
       let start = new Date(year, month-1, day, sHours[i], sMins[i]);

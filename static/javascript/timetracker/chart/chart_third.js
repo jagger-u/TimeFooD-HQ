@@ -20,7 +20,6 @@ function generateThirdDAYS() {
         ALL_DAYS_2[i].month+1, 
         ALL_DAYS_2[i].day, wakeupHour, wakeupMin, workout, [], [], total));
     }
-    console.log(AVG_DAYS);
   } else {
     // Give feedback to user. 
     //There should be two inputs with same number of days starting from 1st of the month.
