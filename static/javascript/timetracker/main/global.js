@@ -34,7 +34,9 @@ class timeGraph {
         yAxes: [{
           ticks: {
             // beginAtZero: true,
-            suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+            // suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+            min: 0,
+            max: 1000,
           }
         }]
       }
@@ -118,7 +120,9 @@ class workoutGraph {
         yAxes: [{
           ticks: {
             // beginAtZero: true,
-            suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+            // suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+            min: 0,
+            max: 300
           }
         }]
       }
@@ -160,7 +164,9 @@ class wakeupGraph {
         yAxes: [{
           ticks: {
             // beginAtZero: true,
-            suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+            // suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+            min: 0,
+            max: 12
           }
         }]
       }
