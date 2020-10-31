@@ -129,3 +129,9 @@ function calcAvg(ALL_DAYS, VARIABLE) {
   });
   return AVG = Number(sum / ALL_DAYS.length).toPrecision(3);
 }
+
+
+function generateRandomId() {
+  const rand = Math.random().toString();
+  return `ITEM_${rand.slice(4, rand.length)}`;
+}
