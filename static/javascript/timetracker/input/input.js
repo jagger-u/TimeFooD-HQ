@@ -1,10 +1,6 @@
 
 
-function getMatches(input, inputREG) {
-  let rgxResult = inputREG[Symbol.matchAll](input);
-  let result = Array.from(rgxResult, x => x[0]);
-  return result;
-}
+
 function getTimeElements(input, regex) {
   let timeArray = [];
   input.forEach((e) => {
@@ -13,29 +9,7 @@ function getTimeElements(input, regex) {
   });
   return timeArray;
 }
-function getTimeElement(time_block, regex) {
-  const match = getMatches(time_block, regex)[0];
-  const time_elem = parseInt(match.substring(1,match.length-1));
-  return time_elem;
-}
 
-function bringHoursMins(time_blocks) {
-  const sHourREG = /(\{[0-9]{1,2}:|\[[0-9]{1,2}:)/g;
-  const sMinREG = /:[0-9]{1,2}-/g;
-  const eHourREG = /-[0-9]{1,2}:/g;
-  const eMinREG = /(:[0-9]{1,2}\}|:[0-9]{1,2}\])/g;
-
-
-  const hours_mins = time_blocks.map(time_block => {
-    const sHour = getTimeElement(time_block, sHourREG);
-    const sMin = getTimeElement(time_block, sMinREG);
-    const eHour = getTimeElement(time_block, eHourREG);
-    const eMin = getTimeElement(time_block, eMinREG);
-    return {sHour: sHour, sMin: sMin, eHour: eHour, eMin: eMin};
-  });
-
-  return hours_mins;
-}
 
 function createDayPeriods(input) {
   const DAYREG = /\-\=\-[0-9A-Za-z -:\}\{\n\[\]]*\-\=\-/g;

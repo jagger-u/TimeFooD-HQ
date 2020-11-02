@@ -135,3 +135,68 @@ function generateRandomId() {
   const rand = Math.random().toString();
   return `ITEM_${rand.slice(4, rand.length)}`;
 }
+
+
+function getMatches(input, inputREG) {
+  let rgxResult = inputREG[Symbol.matchAll](input);
+  let result = Array.from(rgxResult, x => x[0]);
+  return result;
+}
+
+function getTimeElement(time_block, regex) {
+  const match = getMatches(time_block, regex)[0];
+  const time_elem = parseInt(match.substring(1,match.length-1));
+  return time_elem;
+}
+
+function bringHoursMins(time_blocks) {
+  const sHourREG = /(\{[0-9]{1,2}:|\[[0-9]{1,2}:)/g;
+  const sMinREG = /:[0-9]{1,2}-/g;
+  const eHourREG = /-[0-9]{1,2}:/g;
+  const eMinREG = /(:[0-9]{1,2}\}|:[0-9]{1,2}\])/g;
+
+
+  const hours_mins = time_blocks.map(time_block => {
+    const sHour = getTimeElement(time_block, sHourREG);
+    const sMin = getTimeElement(time_block, sMinREG);
+    const eHour = getTimeElement(time_block, eHourREG);
+    const eMin = getTimeElement(time_block, eMinREG);
+    return {sHour: sHour, sMin: sMin, eHour: eHour, eMin: eMin};
+  });
+
+  return hours_mins;
+}
+
+
+
+function whatIsTheDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const day = today.getDate();
+  const todayTime = new Date(year, month, day);
+  return todayTime;
+}
+
+const getMinutes = (hours, minutes) => {
+  const totalMinutes = hours * 60 + minutes;
+  return totalMinutes;
+}
+const getTime = (hours, minutes) => {
+  const today = whatIsTheDate();
+  const totalMinutes = getMinutes(hours, minutes);
+  today.setMinutes(totalMinutes);
+  return today;
+}
+
+
+function getMinsDiff(end_dateTime, start_dateTime) {
+  return (end_dateTime - start_dateTime) / 1000 / 60;
+}
+function getHoursDiff(end_dateTime, start_dateTime) {
+  return (end_dateTime - start_dateTime) / 1000 / 60 / 60;
+}
+
+function digitsShort(num) {
+  return Number(num).toFixed(2);
+}
