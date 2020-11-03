@@ -119,6 +119,50 @@ function getValueOfMonth(month) {
   return value;
 }
 
+function getValueOfMonthInt(month) {
+  let value;
+  if (month == "jan") {
+    value = 1;
+  } 
+  else if (month == "feb") {
+    value = 2;
+  }
+  else if (month == "mar") {
+    value = 3;
+  }
+  else if (month == "apr") {
+    value = 4;
+  }
+  else if (month == "may") {
+    value = 5;
+  }
+  else if (month == "jun") {
+    value = 6;
+  }
+  else if (month == "jul") {
+    value = 7;
+  }
+  else if (month == "aug") {
+    value = 8;
+  }
+  else if (month == "sep") {
+    value = 9;
+  }
+  else if (month == "oct") {
+    value = 10;
+  }
+  else if (month == "nov") {
+    value = 11;
+  }
+  else if (month == "dec") {
+    value = 12;
+  }
+  else {
+    value = 175;
+  }
+  return value;
+}
+
 function calcAvg(ALL_DAYS, VARIABLE) {
   let sum = 0, ITEM;
   ALL_DAYS.forEach((day) => {
@@ -204,11 +248,60 @@ function digitsShort(num) {
 
 
 
+function cutString(input_string, a, b) {
+    const result = input_string.substring(a, input_string.length-b);
+    return result;
+}
+
+function createDayPeriodsStandard(input_time_string) {
+  const rowREGEX = /[A-Za-z]+\s+[A-Za-z0-9\[\]\{\}:\-= \" \(\)]*\n/g;
+  const dayStrings = getMatches(input_time_string, rowREGEX);
+  const dayPeriods = dayStrings.map(datString => createDayPeriodStandard(datString));
+  return dayPeriods;    
+}
+
+function createDayPeriodStandard(input_string) {
+    const MONTHREG = /[A-Za-z]+\s*[0-9]/g;
+    const MONTHTEXTREG = /[A-Za-z]+/g;
+    const monthResultString = getMatches(getMatches(input_string, MONTHREG)[0], MONTHTEXTREG)[0];
+    const month = getValueOfMonthInt(monthResultString.toLowerCase().substring(0,3));
 
 
+    const DAYREG = /[A-Za-z]+\s*[0-9]+\s*\(/g;
+    const DAYNUMREG = /\s[0-9]+\s/g;
+    const dayResultString = getMatches(getMatches(input_string, DAYREG)[0], DAYNUMREG)[0];
+    const day = parseInt(cutString(dayResultString, 1, 1));
 
 
+    const workoutREG = /=[0-9]*=/ig;
+    const workoutNUMREG = /[0-9]+/ig;
+    const workoutResultString = getMatches(getMatches(input_string, workoutREG)[0], workoutNUMREG)[0];
+    const workout_num = parseFloat(workoutResultString);
+    const workout = (workout_num) ? workout_num : 0;
 
+    const timeREG = /(\{[0-9]{1,2}:[0-9]{1,2}-[0-9]{1,2}:[0-9]{1,2}\}|\[[0-9]{1,2}:[0-9]{1,2}-[0-9]{1,2}:[0-9]{1,2}\])/g;
+    const timeResultStrings_array = getMatches(input_string, timeREG);
+
+    const titleREG = /\"[A-Za-z0-9\' .,!\?]*\"/ig;
+    const titleResultStrings_array = getMatches(input_string, titleREG).map(d => cutString(d, 1, 1));
+
+
+    const wakeupREG = / \([0-9]+:[0-9A-z]+\)/ig;
+    const wakeupNumReg = /[0-9]+/ig;
+    const wakeupResultStrings = getMatches(input_string, wakeupREG)[0].split(':');
+    const wakeupHour = parseFloat(getMatches(wakeupResultStrings[0], wakeupNumReg));
+    const wakeupMin = parseFloat(getMatches(wakeupResultStrings[1], wakeupNumReg));
+    const obj = {
+      month: month,
+      day: day,
+      workout: workout,
+      wakeupHour: wakeupHour,
+      wakeupMin: wakeupMin,
+      timeStringArray: timeResultStrings_array,
+      titleStringArray: titleResultStrings_array
+    }
+    return obj;
+}
 
 
 
