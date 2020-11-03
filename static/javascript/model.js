@@ -27,13 +27,12 @@ class GeneralUpdatePattern {
 }
 
 class axisFrame {
-    constructor(selectionClass, axisFunc, scaling, tickSize, containerGroupJoin) {
+    constructor(selectionClass, axisFunc, scaling, containerGroupJoin) {
         this.selectionClass = selectionClass;
         this.scaling = scaling;
-        this.tickSize = tickSize;
         this.container = new ContainerGroup(containerGroupJoin, selectionClass);
 
-        this.axis = axisFunc(this.scaling).tickSize(this.tickSize);
+        this.axis = axisFunc(this.scaling);
         this.axisGroup = this.container.groupData.select(`.${this.selectionClass}`);
 
         this.enter = this.container.groupJoin.append('g').attr('class', this.selectionClass);
