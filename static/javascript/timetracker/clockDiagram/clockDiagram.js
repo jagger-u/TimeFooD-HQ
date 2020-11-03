@@ -2,7 +2,7 @@ function loadClockDiagram(diagram_data) {
     const numData = diagram_data.length;
     const clientRect = document.getElementById('clock-diagram-cont').getBoundingClientRect();
     const width = clientRect.width;
-    const height = 40 * numData;
+    const height = 40 * numData + 200;
 
 
     const numTicks = numData;
@@ -16,7 +16,9 @@ function loadClockDiagram(diagram_data) {
         const start = getTime(d.sHour, d.sMin);
         const end = getTime(d.eHour, d.eMin);
         const minsDiff = getMinsDiff(end, start);
-        return xScale(getTime(BEGIN_HOUR, minsDiff));
+        const width = getTime(BEGIN_HOUR, minsDiff);
+        console.log(width)
+        return xScale(width);
     }
 
     const blockFillFunc = (d) => {
@@ -30,8 +32,8 @@ function loadClockDiagram(diagram_data) {
         return color;
     }
 
-    const BEGIN_HOUR = 4;
-    const END_HOUR = 25;
+    const BEGIN_HOUR = 6;
+    const END_HOUR = 18;
     const baseLine = getTime(BEGIN_HOUR, 0);
     const endLine = getTime(END_HOUR, 0);
     const margin = {top: 50, bottom: 50, left: 50, right: 50};
@@ -39,7 +41,7 @@ function loadClockDiagram(diagram_data) {
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-
+    const xTickNum = (END_HOUR - BEGIN_HOUR)*2;
     const blockHeight = innerHeight / (Math.ceil(numData / 10) * 10);
 
 
@@ -79,6 +81,7 @@ function loadClockDiagram(diagram_data) {
     const bottomAxis = new axisFrame('bottom-axis', d3.axisBottom, xScale, tickSize, mainContainer.group);
     bottomAxis.merge
         .attr('transform', `translate(${0}, ${innerHeight})`)
+    bottomAxis.merge.call(bottomAxis.axis.ticks(xTickNum))
 
     const timeBlock = new GeneralUpdatePattern('timeBlock', diagram_data, 'rect', mainContainer.group);
     timeBlock.merge
@@ -87,7 +90,7 @@ function loadClockDiagram(diagram_data) {
         .attr('fill', d => blockFillFunc(d))
         .attr('x', d => blockXPosition(d))
         .style('opacity', 0.7)
-        .attr('y', (d, idx) => yScale(idx + 1) - blockHeight / 2)
+        .attr('y', (d, idx) => yScale(idx) - blockHeight / 2)
 
 
     const timeBlockTextFunc = (d) => {
@@ -105,6 +108,6 @@ function loadClockDiagram(diagram_data) {
         .text(timeBlockTextFunc)
         // .attr('text-anchor', 'middle')
         .attr('x', d => blockXPosition(d) + blockWidth(d) / 2 - 40)
-        .attr('y', (d, idx) => yScale(idx + 1) + 5)
+        .attr('y', (d, idx) => yScale(idx) + 5)
 }
 
