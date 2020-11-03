@@ -276,3 +276,11 @@ function createDayPeriods(input) {
   });
   return ALL_DAYS;
 }
+
+
+function getDistinctArray(input_array_of_obj, prop) {
+  const attr_array = input_array_of_obj.map(d => d[prop]);
+  const attr_set = new Set(attr_array);
+  const attr_distinct_array = Array.from(attr_set);
+  return attr_distinct_array;
+}

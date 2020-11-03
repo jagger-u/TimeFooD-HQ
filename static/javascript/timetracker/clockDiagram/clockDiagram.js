@@ -1,28 +1,22 @@
 function loadClockDiagram(diagram_data) {
 
 
-
-    function getDistinctArray(input_array_of_obj, prop) {
-        const attr_array = input_array_of_obj.map(d => d[prop]);
-        const attr_set = new Set(attr_array);
-        const attr_distinct_array = Array.from(attr_set);
-        return attr_distinct_array;
-    }
-
-
-
-    const distinct_days = getDistinctArray(diagram_data, 'day');
+    const distinct_months = getDistinctArray(diagram_data, 'month').sort((a,b) => a - b);
+    const distinct_days = getDistinctArray(diagram_data, 'day').sort((a,b) => a - b);
     const numDays = distinct_days.length;
     const clientRect = document.getElementById('clock-diagram-cont').getBoundingClientRect();
     const width = clientRect.width;
-    const height = 40 * numDays + 400;
+    const height = 100 * numDays + 200;
 
+
+
+ 
 
     const BEGIN_HOUR = 6;
     const END_HOUR = 24;
     const baseLine = getTime(BEGIN_HOUR, 0);
     const endLine = getTime(END_HOUR, 0);
-    const margin = {top: 100, bottom: 100, left: 50, right: 50};
+    const margin = {top: 100, bottom: 100, left: 100, right: 50};
     
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
@@ -41,6 +35,18 @@ function loadClockDiagram(diagram_data) {
 
     const leftAxisTextFontSize = 20;
     const bottomAxisTextFontSize = 17;
+
+
+
+    const yFormat = (month, day) => `${getTextValueOfMonth(month).slice(0, 3)}-${day}`;
+    const yValue = d => yFormat(d.month, d.day);
+    const xValue = d => d.hours_mins;
+    const distinct_month_days = d3.cross(distinct_months, distinct_days);
+    const y_text_array = distinct_month_days.map(pair => yFormat(pair[0], pair[1]))
+
+
+
+
 
 
 
@@ -63,10 +69,9 @@ function loadClockDiagram(diagram_data) {
         .range([0, innerWidth])
         .nice();
     const yScale = d3.scaleBand()
-        .domain(distinct_days)
+        .domain(y_text_array)
         .range([0, innerHeight])
         .padding(padding)
-        // .nice();
 
     const leftAxis = new axisFrame('left-axis', d3.axisLeft, yScale, mainContainer.group);
     leftAxis.merge
@@ -85,16 +90,19 @@ function loadClockDiagram(diagram_data) {
         .tickSize(-innerHeight)
     )
     bottomAxis.exit.remove();
-    d3.selectAll('.domain, .tick line').style('color', '#d4d4d4')
 
+
+
+
+
+
+    d3.selectAll('.domain, .tick line').style('color', '#d4d4d4')
     d3.selectAll('.left-axis .tick text')
         .attr('transform', `translate(${leftAxisOffset}, ${0})`)
         .style('font-size', leftAxisTextFontSize)
     d3.selectAll('.bottom-axis .tick text')
         .attr('transform', `translate(${0}, ${bottomAxisOffset})`)
         .style('font-size', bottomAxisTextFontSize)
-
-
     d3.selectAll('.bottom-axis .tick:nth-child(even) text')
         .attr('transform', `translate(${0}, ${bottomAxisOffset + bottomAxisDisplacement})`)
 
@@ -114,6 +122,7 @@ function loadClockDiagram(diagram_data) {
     const blockXPosition = (d) => {
         return xScale(getTime(d.sHour, d.sMin));
     }
+
     const blockWidth = (d) => {
         const start = getTime(d.sHour, d.sMin);
         const end = getTime(d.eHour, d.eMin);
@@ -133,17 +142,21 @@ function loadClockDiagram(diagram_data) {
         return color;
     }
 
-
-
     const timeBlock = new GeneralUpdatePattern('timeBlock', diagram_data, 'rect', mainContainer.group);
     timeBlock.merge
-        .attr('width', d => blockWidth(d.hours_mins))
+        .attr('width', d => blockWidth(xValue(d)))
         .attr('height', yScale.bandwidth())
-        .attr('fill', d => blockFillFunc(d.hours_mins))
-        .attr('x', d => blockXPosition(d.hours_mins))
+        .attr('fill', d => blockFillFunc(xValue(d)))
+        .attr('x', d => blockXPosition(xValue(d)))
         .style('opacity', 0.7)
-        .attr('y', (d) => yScale(d.day))
+        .attr('y', (d) => yScale(yValue(d)))
     timeBlock.exit.remove();
+
+
+
+
+
+
 
     const timeBlockTextFunc = (d) => {
         const start = getTime(d.sHour, d.sMin);
@@ -157,9 +170,9 @@ function loadClockDiagram(diagram_data) {
     };
     const timeBlockText = new GeneralUpdatePattern('timeBlockText', diagram_data, 'text', mainContainer.group);
     timeBlockText.merge
-        .text(d => timeBlockTextFunc(d.hours_mins))
-        .attr('x', d => blockXPosition(d.hours_mins) + blockWidth(d.hours_mins) / 2 - 25)
-        .attr('y', (d) => yScale(d.day) + yScale.bandwidth() / 2 + 5)
+        .text(d => timeBlockTextFunc(xValue(d)))
+        .attr('x', d => blockXPosition(xValue(d)) + blockWidth(xValue(d)) / 2 - 25)
+        .attr('y', (d) => yScale(yValue(d)) + yScale.bandwidth() / 2 + 5)
     timeBlockText.exit.remove();
 }
 
