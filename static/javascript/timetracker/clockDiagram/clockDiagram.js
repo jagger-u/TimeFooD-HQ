@@ -5,8 +5,7 @@ function loadClockDiagram(diagram_data) {
     const height = 40 * numData + 200;
 
 
-    const numTicks = numData;
-    const tickSize = 10;
+
 
 
     const blockXPosition = (d) => {
@@ -41,7 +40,10 @@ function loadClockDiagram(diagram_data) {
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    const xTickNum = (END_HOUR - BEGIN_HOUR)*2;
+    const xTickNum = innerWidth / 50;
+    const yTickNum = numData;
+    const tickSize = 10;
+
     const blockHeight = innerHeight / (Math.ceil(numData / 10) * 10);
 
 
@@ -76,7 +78,7 @@ function loadClockDiagram(diagram_data) {
     const leftAxis = new axisFrame('left-axis', d3.axisLeft, yScale, tickSize, mainContainer.group);
     leftAxis.merge
         .attr('transform', `translate(${0}, ${0})`)
-    leftAxis.merge.call(leftAxis.axis.ticks(numTicks))
+    leftAxis.merge.call(leftAxis.axis.ticks(yTickNum))
         
     const bottomAxis = new axisFrame('bottom-axis', d3.axisBottom, xScale, tickSize, mainContainer.group);
     bottomAxis.merge

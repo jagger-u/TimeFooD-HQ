@@ -8,3 +8,7 @@ function loadChart() {
 }
 loadChart()
 loadChart()
+
+
+// Responsive
+new ResizeObserver(loadChart).observe(document.getElementById('clock-diagram-cont'))
